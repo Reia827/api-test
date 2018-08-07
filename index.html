@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HTTP Requests</title>
+    <script>
+
+function getData(){
+  console.log("getting data")
+
+      // Create a new request object
+
+      let request = new XMLHttpRequest()
+      // TODO: URL to contact goes here
+      let requestUrl = "https://jsonplaceholder.typicode.com/"
+      // Open a connection
+      request.open('GET', requestUrl, true)
+      // Callback for when the request completes
+
+      request.onload = function(){
+        console.log("response from server is: ", request)
+
+        if(request.status !== 200){
+          console.log("Something went wrong: ", request)
+          return
+        }
+        let response = JSON.parse(request.response)
+        console.log("RESPONSE: ", response)
+      }
+
+      // Callback for when there's an error
+      request.error = function(err){
+        console.log("error is: ", err)
+      }
+      // Send the request to the specified URL
+      request.send()
+
+    }
+
+    document.addEventListener("DOMContentLoaded", getData)
+
+    </script>
+  </head>
+
+  <body>
+  <div id="response"></div>
+  </body>
+</html>
