@@ -12,20 +12,41 @@ function getData(){
 
       let request = new XMLHttpRequest()
       // TODO: URL to contact goes here
-      let requestUrl = "https://jsonplaceholder.typicode.com/"
+      let requestUrl = "https://jsonplaceholder.typicode.com/users"
       // Open a connection
       request.open('GET', requestUrl, true)
       // Callback for when the request completes
 
       request.onload = function(){
-        console.log("response from server is: ", request)
+        //console.log("response from server is: ", request)
 
         if(request.status !== 200){
           console.log("Something went wrong: ", request)
           return
         }
+
         let response = JSON.parse(request.response)
+
+        let container = document.getElementById("response")
+
+        for(let i=0; i<response.length; i++){
+          let div = document.createElement("div")
+          let name = document.createElement("h2")
+          name.innerHTML = response[i].name
+          div.appendChild(name)
+          let username = document.createElement("h3")
+          username.innerHTML = response[i].username
+          div.appendChild(username)
+          let city = document.createElement("small")
+          city.innerHTML = response[i].address.city
+          div.appendChild(city)
+          container.appendChild(div)
+        }
+
         console.log("RESPONSE: ", response)
+        for(let i=0; i<response.length; i++){
+          console.log("USER????", response[i].name)
+        }
       }
 
       // Callback for when there's an error
@@ -34,8 +55,7 @@ function getData(){
       }
       // Send the request to the specified URL
       request.send()
-
-    }
+  }
 
     document.addEventListener("DOMContentLoaded", getData)
 
@@ -44,5 +64,67 @@ function getData(){
 
   <body>
   <div id="response"></div>
+
+<!-- users
+  <div>
+    <h2>Leanne Graham</h2>
+    <h3>Bret</h3>
+    <small>GwenBorough</small>
+  </div>
+
+  <div>
+    <h2>Ervin Howell</h2>
+    <h3>Antonette</h3>
+    <small>Wisokyburgh</small>
+  </div>
+
+  <div>
+    <h2>Clementine Bauch</h2>
+    <h3>Samantha</h3>
+    <small>McKenziehaven</small>
+  </div>
+
+  <div>
+    <h2>Patricia Lebsack</h2>
+    <h3>Karianne</h3>
+    <small>GSouth Elvis</small>
+  </div>
+
+  <div>
+    <h2>Chelsey Dietrich</h2>
+    <h3>Kamren</h3>
+    <small>Roscoeview</small>
+  </div>
+
+  <div>
+    <h2>Mrs. Dennis Schulist</h2>
+    <h3>Leopoldo_Corkery</h3>
+    <small>GSouth Christy</small>
+  </div>
+
+  <div>
+    <h2>Kurtis Weissnat</h2>
+    <h3>Elwyn.Skiles</h3>
+    <small>Howemouth</small>
+  </div>
+
+  <div>
+    <h2>Nicholas Runolfsdottir V</h2>
+    <h3>Maxime_Nienow</h3>
+    <small>Aliyaview</small>
+  </div>
+
+  <div>
+    <h2>Glenna Reichert</h2>
+    <h3>Delphine</h3>
+    <small>Bartholomebury</small>
+  </div>
+
+  <div>
+    <h2>Clementina DuBuque</h2>
+    <h3>Moriah.Stanton</h3>
+    <small>Lebsackbury</small>
+  </div> -->
+
   </body>
 </html>
